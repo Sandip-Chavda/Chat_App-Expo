@@ -1,13 +1,22 @@
 import "../../global.css";
 
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
 
 const RootLayout = () => {
-  return <Slot />;
+  const isAuthenticated = true;
+
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Protected guard={!isAuthenticated}>
+        <Stack.Screen name="(auth)" options={{}} />
+      </Stack.Protected>
+
+      <Stack.Protected guard={isAuthenticated}>
+        <Stack.Screen name="(drawer)" options={{}} />
+      </Stack.Protected>
+    </Stack>
+  );
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({});
